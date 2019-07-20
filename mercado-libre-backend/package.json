@@ -1,0 +1,22 @@
+{
+    "name": "mercado-libre-backend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node src",
+        "dev": "nodemon src"
+    },
+    "keywords": [],
+    "author": "Diego Pastoriza",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "node-fetch": "^2.6.0",
+        "request": "^2.88.0"
+    },
+    "devDependencies": {
+        "nodemon": "^1.19.1"
+    }
+}
