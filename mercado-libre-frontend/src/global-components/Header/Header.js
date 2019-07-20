@@ -16,7 +16,7 @@ export default class Header extends Component {
                             <div className="search-tool">
                                 <form className="search-nav flex">
                                     <input type="text" value="" placeholder="Nunca dejes de buscar"/>
-                                    <button type="submit"><i class="fas fa-search"></i></button>
+                                    <button class="search-button" type="submit"><i></i></button>
                                 </form>
                             </div>
                         </div>

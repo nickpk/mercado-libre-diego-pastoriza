@@ -1,11 +1,17 @@
 //colors
-$yellow-ml :#fff159;
-$grey : #333;
-$grey2 : #666;
-$grey3 : #f3f1f1;
+$yellow-ml :#FFE600;
+$grey : #333333;
+$grey2 : #666666;
+$grey3 : #999999;
+$grey4 : #EEEEEE;
+$blue : #3483FA;
 
-//logo
-$logo-ml : "https://http2.mlstatic.com/ui/navigation/4.2.5/mercadolibre/logo__small.png";
+
+$marginx1:16px;
+$marginx2:28px;
+$marginx3:32px;
+
+$radius:4px;
 
 //media query
 $large-size:1024px;
@@ -16,4 +22,4 @@ $large-size:1024px;
     -webkit-box-shadow: $height $long  $radio $color;
     -moz-box-shadow: $height $long  $radio $color;
     box-shadow: $height $long  $radio $color;
-  }
+}

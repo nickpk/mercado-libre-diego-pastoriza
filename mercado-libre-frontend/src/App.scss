@@ -9,6 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color:$grey4;
 }
 
 code {
@@ -24,11 +25,16 @@ input:focus{
   box-sizing: border-box;
 }
 
-
 /*Owns Class*/
 
 .flex{
   display:flex;
+}
+.left{
+  float:left;
+}
+.right{
+  float:right;
 }
 
 .container {

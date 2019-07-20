@@ -1,0 +1,42 @@
+@import '../../styles/variables.scss';
+
+.product{
+    padding:$marginx1 0 $marginx1 $marginx1;
+    overflow: hidden;
+    .left{
+        > div{
+            display:inline-block;
+            vertical-align: top;
+        }
+        img{
+            margin-right:$marginx1;
+            border-radius:$radius;
+        }
+        .description{    
+            color:$grey2;   
+            max-width:400px; 
+            b{
+                display:block;
+                font-size:24px;;
+                font-weight:normal;
+                margin-bottom:$marginx3;
+                margin-top:$marginx1;
+            }
+            p{
+                font-size:18px;
+                line-height: 1.4;
+            }
+        }
+
+    }
+    .right{
+        position:relative;
+        right:100px;
+        span{
+            display:block;
+            margin-top:$marginx1;
+            font-size:12px;
+            color:$grey3;
+        }
+    }
+}
