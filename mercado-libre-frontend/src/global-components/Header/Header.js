@@ -1,8 +1,33 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import '../../styles/variables.scss';
 import './Header.scss';
 
-export default class Header extends Component {
+class Header extends Component {
+
+    placeHolder = "Nunca dejes de buscar";
+
+    constructor(props){
+        super(props);
+        this.state = {
+            searchQuery: ""
+        }
+        this.changeValueSearch = this.changeValueSearch.bind(this);	
+    }
+
+    
+    searchSubmit = () => {
+        let url = `/items?search=${this.state.searchQuery}`;
+        this.props.history.push(url);	
+
+    }
+
+    changeValueSearch = (event) => {
+        this.setState({
+            searchQuery : (event.target.value)
+        })
+    }
+
     render() {
         return (
             <header>
@@ -15,8 +40,8 @@ export default class Header extends Component {
                             </h1>
                             <div className="search-tool">
                                 <form className="search-nav flex">
-                                    <input type="text" value="" placeholder="Nunca dejes de buscar"/>
-                                    <button class="search-button" type="submit"><i></i></button>
+                                    <input  type="query" onChange={this.changeValueSearch} value={this.state.searchQuery}  placeholder={this.placeHolder}/>
+                                    <button className="search-button" type="button" onClick={() => this.searchSubmit()}><i></i></button>
                                 </form>
                             </div>
                         </div>
@@ -25,3 +50,6 @@ export default class Header extends Component {
         )
     }
 }
+
+
+export default withRouter(Header);

@@ -1,12 +1,12 @@
-import React from 'react';
-import Products from '../../components/products/Products';
+import React, {Component} from 'react'
 
-function Home() {
-  return (
-    <div className="Home">
-       <Products />
-    </div>
-  );
+class Home extends Component{
+    render(){
+        return(
+            <div className="Home">     
+            </div>
+        )
+    }
 }
 
 export default Home;

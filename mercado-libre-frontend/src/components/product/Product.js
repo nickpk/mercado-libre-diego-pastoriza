@@ -9,7 +9,7 @@ export default class Product extends Component {
                     <div>
                         <img src="http://lorempixel.com/180/180/"/>
                     </div>
-                    <div class="description">
+                    <div className="description">
                         <b>$ 1.980</b>
                         <p>Apple ipod Touch 5gb 16gb Negro igual A Nuevo Completo Unico!</p>
                     </div>
