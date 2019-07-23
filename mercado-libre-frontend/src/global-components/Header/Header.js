@@ -13,13 +13,19 @@ class Header extends Component {
             searchQuery: ""
         }
         this.changeValueSearch = this.changeValueSearch.bind(this);	
+        this.keyPress = this.keyPress.bind(this);
     }
 
+    keyPress(e){
+        if(e.keyCode == 13){
+           console.log('value', e.target.value);
+        }
+     }
     
     searchSubmit = () => {
         let url = `/items?search=${this.state.searchQuery}`;
         this.props.history.push(url);	
-
+        window.location.reload();
     }
 
     changeValueSearch = (event) => {
@@ -27,6 +33,10 @@ class Header extends Component {
             searchQuery : (event.target.value)
         })
     }
+
+    handleSubmit = event => {
+        event.preventDefault();
+    };
 
     render() {
         return (
@@ -39,9 +49,9 @@ class Header extends Component {
                                 </a>
                             </h1>
                             <div className="search-tool">
-                                <form className="search-nav flex">
+                                <form onSubmit={this.handleSubmit} className="search-nav flex">
                                     <input  type="query" onChange={this.changeValueSearch} value={this.state.searchQuery}  placeholder={this.placeHolder}/>
-                                    <button className="search-button" type="button" onClick={() => this.searchSubmit()}><i></i></button>
+                                    <button className="search-button" type="button" onClick={() => this.searchSubmit()} onKeyPress={this.handleKeyPress}><i></i></button>
                                 </form>
                             </div>
                         </div>

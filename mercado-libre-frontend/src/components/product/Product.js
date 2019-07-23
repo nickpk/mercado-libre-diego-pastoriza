@@ -3,15 +3,17 @@ import './Product.scss';
 
 export default class Product extends Component {
     render() {
+        const {title,price,picture} = this.props;
+        console.log(title);
         return (
             <div className="product">
                 <div className="left">
                     <div>
-                        <img src="http://lorempixel.com/180/180/"/>
+                        <img src={picture}/>
                     </div>
                     <div className="description">
-                        <b>$ 1.980</b>
-                        <p>Apple ipod Touch 5gb 16gb Negro igual A Nuevo Completo Unico!</p>
+                        <b>${price.amount}</b>
+                        <p>{title}</p>
                     </div>
                 </div>
                 <div className="right">

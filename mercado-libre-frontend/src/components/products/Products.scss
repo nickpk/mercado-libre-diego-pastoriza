@@ -3,4 +3,21 @@
 .products-list{
     background:#ffffff;;
     border-radius:$radius;
+    margin-top:10px;
+}
+
+
+.error-msg{
+    padding:30px;
+    background-color:#ffffff;
+    margin-top:10px;
+    p{
+        font-size:20px;
+        background-image:url('../../assets/imgs/not-found.png');
+        background-repeat:no-repeat;
+        background-position:center left;
+        height:103px;
+        padding-left:120px;
+        line-height:103px;
+    }
 }

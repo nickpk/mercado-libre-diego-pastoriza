@@ -8,10 +8,6 @@ import Content from './global-components/content/Content';
 
 export default class App extends Component {
 
-    static propTypes = {
-        children: PropTypes.object.isRequired
-    }
-
     render() {
         const {children} = this.props;
         return (
@@ -22,5 +18,9 @@ export default class App extends Component {
                 </main>
             </div>
         );
+    }
+
+    static propTypes = {
+        children: PropTypes.object.isRequired
     }
 }
