@@ -9,6 +9,7 @@ class Header extends Component {
 
     constructor(props){
         super(props);
+        console.log('header', props)
         this.state = {
             searchQuery: ""
         }
@@ -23,6 +24,9 @@ class Header extends Component {
      }
     
     searchSubmit = () => {
+        if(!this.state.searchQuery.length){
+            return false
+        }
         let url = `/items?search=${this.state.searchQuery}`;
         this.props.history.push(url);	
         window.location.reload();

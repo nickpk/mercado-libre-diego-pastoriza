@@ -1,10 +1,11 @@
 var request = require('request');
 const express = require('express');
-const app = express();
 const fetch = require('node-fetch');
+const app = express();
 
-var searchUrl = 'https://api.mercadolibre.com/sites/MLA/search?q=:';
-var descriptionUrl = 'https://api.mercadolibre.com/items/';
+
+const searchUrl = 'https://api.mercadolibre.com/sites/MLA/search?q=:';
+const detailsUrl = 'https://api.mercadolibre.com/items/';
 
 
 app.use((rq, rs, next) => {
@@ -15,12 +16,10 @@ app.use((rq, rs, next) => {
     next();
 });
 
-//settings
 app.set('port', 3500);
 
-// calls
 app.get('/', function (req, res) {
-    res.send("Hello world");
+    res.send("Hola Bienvenidos a mi APP de Mercado libre, Mi nombre es Diego Pastoriza");
 });
   
 app.get('/api/query/:query', function (req, res) {
@@ -31,22 +30,66 @@ app.get('/api/query/:query', function (req, res) {
         var info = JSON.parse(body);
   
         var resultsItems = info.results;
-        var items = [];
+        var products = [];
         var categories = [];
         for (let i = 0; i < resultsItems.length; i++) {
-  
           categories.push(resultsItems[i].category_id);
-  
-          items.push({
-            id: resultsItems[i].id, title: resultsItems[i].title,
-            price: { currency: resultsItems[i].currency_id, amount: resultsItems[i].price, decimals: 0 },
-            picture: resultsItems[i].thumbnail, condition: resultsItems[i].condition, free_shipping: resultsItems[i].free_shipping, address: resultsItems[i].address.city_name
+          products.push({
+            id: resultsItems[i].id, 
+                title: resultsItems[i].title,
+            price: { 
+                currency: resultsItems[i].currency_id,
+                amount: resultsItems[i].price, 
+                decimals: 0 
+            },
+            thumbnail: 
+                resultsItems[i].thumbnail, 
+                condition: resultsItems[i].condition, 
+                free_shipping: resultsItems[i].free_shipping, 
+                address: resultsItems[i].address.city_name
           })
         }
-        res.json({ author: { name: "Diego", lastname: "Pastoriza" }, categories: [categories], items: [items] })
+        res.json({ author: { name: "Diego", lastname: "Pastoriza" }, categories: [categories], products: [products] })
       }
     })
   
+});
+
+
+app.get('/api/item/:id', function (req, res) {
+  var id = req.params.id;
+  var url = detailsUrl + id
+  var descriptionUrl = url + "/description";
+  const urls = [
+    url,
+    descriptionUrl
+  ];
+
+  Promise.all(urls.map(url =>
+    fetch(url)
+      .then(statusInfo)
+      .then(parseJSON)
+      .catch(error => console.log('Se a producido el siguiente error: ', error))
+  ))
+    .then(data => {
+      res.json({
+        author: { name: "Diego", lastname: "Pastoriza" },
+        product: {
+          id: data[0].id, 
+              title: data[0].title,
+          price: { currency: data[0].currency_id,
+                   amount: data[0].price, 
+                   decimals: data[0].base_price },
+
+          thumbnail: data[0].thumbnail, 
+                   condition: data[0].condition,
+                  free_shipping: data[0].free_shipping,
+         
+          sold_quantity: data[0].sold_quantity, 
+                         description: data[1].plain_text
+        }
+      });
+    })
 });
 
 function parseJSON(resp) {
@@ -61,9 +104,6 @@ function statusInfo(resp) {
     }
 }
   
-
-
-
 
 app.listen(app.get('port'), () => {
     console.log('Server en puerto', app.get('port'))

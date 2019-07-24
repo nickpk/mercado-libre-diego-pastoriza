@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Products.scss';
-import Product from '../product/Product';
+import Product from '../Product/Product';
 import { PulseLoader } from 'react-spinners';
 
 
@@ -12,25 +12,21 @@ export default class Products extends Component {
     errorMsg = "No se encontraron resultados para su busqueda";
     listProducts;
   
-    constructor() {
-          super();
+    constructor(props) {
+          super(props);
           this.state = {
-            loading:false,
+            loading:true,
           }
     }
-    async componentDidMount() {
-      this.onInit();
-    }
 
-    async onInit(){
+    async componentDidMount() {
+      console.log(this.props);
       let props = this.props.search;    
       let searchData = queryString.parse(props);
       this.query = searchData.search;
       var result = await this.filterList(this.query);
-      console.log(result);
-      this.setState({loading:true});
+      this.setState({loading:false});
     }
-
 
      filterList(search) {
       let url = `http://localhost:3500/api/query/${search}`;
@@ -44,14 +40,14 @@ export default class Products extends Component {
             return response.json();
           })
           .then((data) => {
-            this.data = true;
             if (data) {
-              data.items[0].map((product) =>{
+              data.products[0].map((product) =>{
                 if(this.listProducts.length < 4){
                   this.listProducts.push(product);
                 }
               }) 
             }
+            console.log('productList',this.listProducts)
             resolve(this.listProducts);
           })
       })
@@ -59,15 +55,21 @@ export default class Products extends Component {
 
     render() {     
       const {loading} = this.state
-      if(!loading){
+      if(loading){
         return <div className='sweet-loading'> <PulseLoader/> </div>
       } 
       if(this.listProducts.length > 0){
         return(  
           <div className="container">
-            <div className="products-list">
+            <div className="product-list white-block">
             {this.listProducts.map( product => {
-            return <Product key={product.id} title={product.title} price={product.price} picture={product.picture}/>
+            return <Product 
+                    key={product.id} 
+                    title={product.title} 
+                    price={product.price} 
+                    thumbnail={product.thumbnail}
+                    address={product.address}
+                    idproduct={product.id}/>
             })}
             </div>
           </div>
@@ -78,10 +80,9 @@ export default class Products extends Component {
                     <div className="error-msg">
                         <p>{this.errorMsg}</p>
                     </div>
-                </div>
-        )
+                </div>)
       }
 
-      } 
-  }
+    } 
+}
 

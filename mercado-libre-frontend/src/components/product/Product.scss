@@ -16,12 +16,17 @@
         .description{    
             color:$grey2;   
             max-width:400px; 
+            a{
+                text-decoration: none;
+                color:$grey;
+            }
             b{
                 display:block;
                 font-size:24px;;
                 font-weight:normal;
                 margin-bottom:$marginx3;
                 margin-top:$marginx1;
+                font-weight: bold;
             }
             p{
                 font-size:18px;

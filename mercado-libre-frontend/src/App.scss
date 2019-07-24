@@ -4,9 +4,7 @@
 
 body {
   margin: 0;
-  font-family:  "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: 'Montserrat', sans-serif, Helvetica,Helvetica,Roboto,Arial,sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color:$grey4;
@@ -56,4 +54,10 @@ input:focus{
       margin-left:5px;
     }
   }
+}
+
+.white-block{
+  background:#ffffff;;
+  border-radius:$radius;
+  margin-top:10px;
 }
